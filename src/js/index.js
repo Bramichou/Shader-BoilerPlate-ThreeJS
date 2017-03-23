@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import TrackballControls from 'three-trackballcontrols'
 import EASE from './utils/easing'
-import Plane from './class/plane'
+import Plane from './class/sphere'
 
 let scene, camera, renderer, light, light2, controls, helper, plane
 
@@ -13,7 +13,7 @@ function init(){
     scene = new THREE.Scene()
 
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
-    camera.position.z = 30
+    camera.position.z = 150
 
     controls = new TrackballControls(camera)
 
@@ -31,7 +31,7 @@ function init(){
 
     let uniforms = {
         u_time: { type: 'f', value: 0 },
-        u_amplitude : { type: 'f', value: 10.},
+        u_amplitude : { type: 'f', value: 5.},
         u_frequency : { type: 'f', value: .05}
     }
 

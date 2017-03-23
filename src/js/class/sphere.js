@@ -1,18 +1,17 @@
 import * as THREE from 'three'
 
-export default class Plane extends THREE.Object3D{
+export default class Sphere extends THREE.Object3D{
     constructor(options) {
         super(options)
         this.scene = options.scene
-        this.width = options.width || 100
-        this.height = options.height || 200
-        this.widthSegments = options.widthSegments || 200
-        this.heightSegments = options.heightSegments || 200
+        this.radius = options.radius || 50
+        this.widthSegments = options.widthSegments || 100
+        this.heightSegments = options.heightSegments || 100
         this.uniforms = options.uniforms || {}
         this.vertexShader = options.vertexShader
         this.fragmentShader = options.fragmentShader
 
-        this.geometry = options.geometry || new THREE.PlaneBufferGeometry(this.width, this.height, this.widthSegments, this.heightSegments);
+        this.geometry = options.geometry || new THREE.SphereBufferGeometry(this.radius, this.widthSegments, this.heightSegments);
 
         this.material = options.material || new THREE.RawShaderMaterial( {
                 uniforms: this.uniforms,
@@ -30,6 +29,5 @@ export default class Plane extends THREE.Object3D{
 
     update(){
         this.uniforms.u_time.value += .01
-        console.log(this.uniforms.u_time)
     }
 }

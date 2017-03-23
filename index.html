@@ -11,8 +11,6 @@
 attribute vec3 position;
 attribute vec3 normal;
 
-varying vec3 vNormal;
-
 uniform mat4 projectionMatrix;
 uniform mat4 modelMatrix;
 uniform mat4 viewMatrix;
@@ -100,8 +98,7 @@ float cnoise(vec3 P){
 
 void main () {
     scalarMove = u_amplitude * cnoise(u_frequency * position + u_time);
-    vNormal = normal;
-    newPos = position + vNormal * scalarMove;
+    newPos = position + normal * scalarMove;
 
     gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(newPos, 1.);
 }
@@ -112,7 +109,7 @@ void main () {
 precision highp float;
 
 void main () {
-  gl_FragColor = vec4(.5);
+  gl_FragColor = vec4(vec3(1.), 1.);
 }
 </script>
 <script src="build/build.js"></script>
