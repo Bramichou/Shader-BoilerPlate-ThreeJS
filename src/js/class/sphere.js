@@ -7,8 +7,8 @@ export default class Sphere extends THREE.Object3D{
         super(options)
         this.scene = options.scene
         this.radius = options.radius || 50
-        this.widthSegments = options.widthSegments || 100
-        this.heightSegments = options.heightSegments || 100
+        this.widthSegments = options.widthSegments || 70
+        this.heightSegments = options.heightSegments || 70
         this.uniforms = options.uniforms || {}
 
         this.amplitude = this.uniforms.amplitude
