@@ -1,9 +1,10 @@
 import * as THREE from 'three'
-import TrackballControls from 'three-trackballcontrols'
 import EASE from './utils/easing'
 import Sphere from './class/sphere'
+import OrbitControls from 'orbit-controls-es6'
 
-let scene, camera, renderer, light, light2, controls, helper, sphere, uniforms
+
+let scene, camera, renderer, controls, helper, sphere, uniforms
 
 window.addEventListener('load', () => {
     init()
@@ -24,13 +25,7 @@ function init(){
     })
     renderer.setSize(window.innerWidth, window.innerHeight)
 
-    controls = new TrackballControls(camera, renderer.domElement)
-
-    light = new THREE.DirectionalLight(0xffffff, 1)
-    light2 = new THREE.DirectionalLight(0xffffff, 1)
-    light.position.y = 100
-    light2.position.y = -100
-
+    controls = new OrbitControls(camera, renderer.domElement)
 
     document.body.appendChild(renderer.domElement)
 
@@ -48,21 +43,12 @@ function init(){
         fragmentShader : document.getElementById( 'fragmentShader' ).textContent
     })
 
-    light.target = sphere
-    light2.target = sphere
-
-    console.log(dat)
-
-    scene.add(light)
-    scene.add(light2)
-
     window.addEventListener('resize', resize, false);
     update()
 }
 
 function update() {
     requestAnimationFrame(update)
-    controls.update()
     renderer.render(scene, camera)
     camera.updateProjectionMatrix()
     sphere.update()

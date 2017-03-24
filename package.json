@@ -40,7 +40,7 @@
     ]
   },
   "dependencies": {
-    "three": "^0.84.0",
-    "three-trackballcontrols": "^0.0.5"
+    "orbit-controls-es6": "^1.0.8",
+    "three": "^0.84.0"
   }
 }

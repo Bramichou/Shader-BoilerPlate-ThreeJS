@@ -9,6 +9,6 @@ export default class GuiOptions{
 
     displayGUI(){
         this.gui.add(this, 'amplitude', 1., 30)
-        this.gui.add(this, 'frequency', .01, 1)
+        this.gui.add(this, 'frequency', .001, 2)
     }
 }
