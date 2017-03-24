@@ -31,7 +31,7 @@ export default class Sphere extends THREE.Object3D{
                 },
                 vertexShader: document.getElementById( 'vertexShader' ).textContent,
                 fragmentShader: document.getElementById( 'fragmentShader' ).textContent,
-                wireframe: true
+                wireframe: this.options.wireframe
             } );
 
         let plane = new THREE.Mesh(this.geometry, this.material)
@@ -45,6 +45,7 @@ export default class Sphere extends THREE.Object3D{
         this.material.uniforms.u_amplitude.value = this.options.amplitude
         this.material.uniforms.u_frequency.value = this.options.frequency
         this.material.uniforms.u_time.value += .04
+        this.material.wireframe = this.options.wireframe
         console.log()
     }
 }
