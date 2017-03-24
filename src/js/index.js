@@ -1,11 +1,14 @@
 import * as THREE from 'three'
 import TrackballControls from 'three-trackballcontrols'
 import EASE from './utils/easing'
-import Plane from './class/sphere'
+import Sphere from './class/sphere'
 
-let scene, camera, renderer, light, light2, controls, helper, plane
+let scene, camera, renderer, light, light2, controls, helper, sphere, uniforms
 
-init()
+window.addEventListener('load', () => {
+    init()
+})
+
 
 
 function init(){
@@ -15,42 +18,45 @@ function init(){
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
     camera.position.z = 150
 
-    controls = new TrackballControls(camera)
-
-    light = new THREE.DirectionalLight(0xffffff, 1)
-    light2 = new THREE.DirectionalLight(0xffffff, 1)
-    light.position.y = 100
-    light2.position.y = -100
 
     renderer = new THREE.WebGLRenderer({
         antialiasing : true
     })
     renderer.setSize(window.innerWidth, window.innerHeight)
 
+    controls = new TrackballControls(camera, renderer.domElement)
+
+    light = new THREE.DirectionalLight(0xffffff, 1)
+    light2 = new THREE.DirectionalLight(0xffffff, 1)
+    light.position.y = 100
+    light2.position.y = -100
+
+
     document.body.appendChild(renderer.domElement)
 
-    let uniforms = {
-        u_time: { type: 'f', value: 0 },
-        u_amplitude : { type: 'f', value: 5.},
-        u_frequency : { type: 'f', value: .05}
+    uniforms = {
+        time: 0.,
+        amplitude : 5.,
+        frequency : .05
     }
 
     // Instances
-    plane = new Plane({
+    sphere = new Sphere({
         scene : scene,
         uniforms : uniforms,
         vertexShader : document.getElementById( 'vertexShader' ).textContent,
         fragmentShader : document.getElementById( 'fragmentShader' ).textContent
     })
 
-    light.target = plane
-    light2.target = plane
+    light.target = sphere
+    light2.target = sphere
+
+    console.log(dat)
 
     scene.add(light)
     scene.add(light2)
 
     window.addEventListener('resize', resize, false);
-
     update()
 }
 
@@ -59,7 +65,7 @@ function update() {
     controls.update()
     renderer.render(scene, camera)
     camera.updateProjectionMatrix()
-    plane.update()
+    sphere.update()
 }
 
 
